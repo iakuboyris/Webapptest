@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UFT-8">
+		<title>書籍一覧</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<!--ブラウザ全体-->
+		<div id="wrap">
+			
+			<!--ヘッダー部分-->
+			<header>
+				<div class ="container">
+					<h1>書籍管理システムSpeing版　Ver.0.5</h1>
+				</div>
+			</header>
+			
+			<!--メニュー部分-->
+			<div id="menu">
+				<div class="container">
+					<!--ナビゲーション-->
+					<div id ="nav">
+						<ui>
+							<li><a href="#">[メニュー]</a></li>
+							<li><a href="insert">[書籍登録]</a></li>
+						</ui>
+					</div>
+					
+					<!--ページタイトル-->
+					<div id="page_title">
+						<h2>書籍一覧</h2>
+					</div>
+				</div>
+			</div>
+			<div id="main" class="container">
+				
+				<!--検索フォーラム-->
+				<form class="inline-block" action="/serch">
+					ISBN <input type="text" name="isbn">
+					TITLE <input type="text" name="title">
+					価格 <input type="text" name="price">
+					<input type="submit" value="検索">
+				</form>
+				<form class="inline-block" action="/list">
+					<input type="submit" value="全件表示">
+				</form>
+				<!--書籍情報リスト-->
+				<table class="list-table">
+					<thead>
+						<tr>
+							<th>ISBN</th>
+							<th>TITLE</th>
+							<th>価格</th>
+							<th>変更/削除</th>
+						</tr>
+					</thead>
+					<tbody th:if="${book_list.size() >= 1}">
+						<tr th:each="book:${book_list}" th:object="${book}">
+							<td><a href="#" th:text="${book.isbn}"></a></td>
+							<td th:text="${book.title}"></td>
+							<td th:text="${book.price}"></td>
+							<td>
+								<a href="#">変更</a>
+								<a href="#">削除</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--フッター部分-->
+			<footer>
+				<div class="container">
+					<h4>Copyright&copy; 2018 ALL Right Reserved</h4>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
